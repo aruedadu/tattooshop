@@ -1,6 +1,7 @@
 package co.com.ceiba.tattooshop.domain.service;
 
-import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,10 @@ import co.com.ceiba.tattooshop.domain.model.Quotation;
 @Service
 public class QuotationService {
 
-	public static final int NO_SERVICE_DAY = 7;
+	public static final DayOfWeek NO_SERVICE_DAY = DayOfWeek.SUNDAY;
 
-	public Quotation getQuotation(LocalDate startDate, int duration) {
+	public Quotation getQuotation(LocalDateTime startDate, int duration) {
+		LocalDateTime endDate = startDate.plusHours(duration);
 		return new Quotation();
 	}
 
