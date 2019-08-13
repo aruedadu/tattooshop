@@ -15,10 +15,8 @@ pipeline{
 	}
 	
 	stages{
-		echo "------------>init stages<------------"
 		stage('Checkout') {
 			steps{
-				echo "------------>Checkout<------------"
 				checkout(
 					[
 						$class: 'GitSCM', 
@@ -43,14 +41,12 @@ pipeline{
 	
 	stage('Compile') {
 		steps{
-			echo "------------>Compile<------------"
 			sh 'gradle --b ./build.gradle compileJava'
 		}
 	}
 	
 	stage('Unit Tests') {
 		steps{
-			echo "------------>Unit Tests<------------"
 			sh 'gradle test'
 			junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 		}
@@ -58,7 +54,6 @@ pipeline{
 	
 	stage('Static Code Analysis') {
 		steps{
-			echo "------------>Static Code Analysis<------------"
 			withSonarQubeEnv('Sonar') {
 				sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
 			}
@@ -67,7 +62,6 @@ pipeline{
 	
 	stage('Build') {
 		steps{
-			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
 			sh 'gradle --b ./build.gradle build -x test'
 		}
