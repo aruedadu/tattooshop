@@ -14,7 +14,8 @@ pipeline{
 		gradle 'Gradle4.5_Centos'
 	}
 	
-	stages{	
+	stages{
+		echo "------------>init stages<------------"
 		stage('Checkout') {
 			steps{
 				echo "------------>Checkout<------------"
