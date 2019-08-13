@@ -17,6 +17,7 @@ pipeline{
 	stages{
 		stage('Checkout') {
 			steps{
+				echo "------------>Checkout<------------"
 				checkout(
 					[
 						$class: 'GitSCM', 
@@ -36,36 +37,41 @@ pipeline{
 				)
 				sh 'gradle clean'
 			}
-		}	
-	}
-	
-	stage('Compile') {
-		steps{
-			sh 'gradle --b ./build.gradle compileJava'
 		}
-	}
-	
-	stage('Unit Tests') {
-		steps{
-			sh 'gradle test'
-			junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
+			
+		stage('Compile') {
+			steps{
+				echo "------------>Compile<------------"
+				sh 'gradle --b ./build.gradle compileJava'
+			}
 		}
-	}
-	
-	stage('Static Code Analysis') {
-		steps{
-			withSonarQubeEnv('Sonar') {
-				sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+		
+		stage('Unit Tests') {
+			steps{
+				echo "------------>Unit tests<------------"
+				sh 'gradle test'
+				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
+			}
+		}
+		
+		stage('Static Code Analysis') {
+			steps{
+				echo "------------>Sonar<------------"
+				withSonarQubeEnv('Sonar') {
+					sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+				}
+			}
+		}
+		
+		stage('Build') {
+			steps{
+				echo "------------>Build<------------"			
+				//Construir sin tarea test que se ejecutó previamente
+				sh 'gradle --b ./build.gradle build -x test'
 			}
 		}
 	}
 	
-	stage('Build') {
-		steps{
-			//Construir sin tarea test que se ejecutó previamente
-			sh 'gradle --b ./build.gradle build -x test'
-		}
-	}
 	
 	post{
 	
