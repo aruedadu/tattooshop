@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import co.com.ceiba.tattooshop.domain.model.Appointment;
 import co.com.ceiba.tattooshop.infraestructure.entity.AppointmentEntity;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, Long> {
