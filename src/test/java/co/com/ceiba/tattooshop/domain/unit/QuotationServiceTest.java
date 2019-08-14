@@ -78,9 +78,9 @@ public class QuotationServiceTest {
 		
 		//act -assert
 		
-		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> {
-			service.getQuotation(startDate, duration);
-		}).withMessageMatching("Los Domingos no hay servicio!");
+		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
+			service.getQuotation(startDate, duration)
+		).withMessageMatching("Los Domingos no hay servicio!");
 	}
 
 }
