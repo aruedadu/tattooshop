@@ -5,16 +5,28 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import co.com.ceiba.tattooshop.domain.exception.NoServiceException;
 import co.com.ceiba.tattooshop.domain.model.Quotation;
 
 @Service
 public class QuotationService {
 
-	public static final DayOfWeek NO_SERVICE_DAY = DayOfWeek.SUNDAY;
+	private static final DayOfWeek NO_SERVICE_DAY = DayOfWeek.SUNDAY;
+	private static final int ADDITIONAL_VALUE_HOUR = 20;
 
 	public Quotation getQuotation(LocalDateTime startDate, int duration) {
-		LocalDateTime endDate = startDate.plusHours(duration);
-		return new Quotation();
+		if (startDate.getDayOfWeek() != NO_SERVICE_DAY) {
+			LocalDateTime endDate = startDate.plusHours(duration);
+			long quotationValue = Quotation.TATTOO_HOUR_VALUE * duration;
+			if (startDate.getHour() >= ADDITIONAL_VALUE_HOUR) {
+				quotationValue += quotationValue * Quotation.ADDITIONAL_VALUE_POS_8;
+			} else if (endDate.getHour() >= ADDITIONAL_VALUE_HOUR) {
+				quotationValue += quotationValue * Quotation.ADDITIONAL_VALUE_PRE_8;
+			}
+			return new Quotation(startDate, endDate, quotationValue);
+		} else {
+			throw new NoServiceException("Los Domingos no hay servicio!");
+		}
 	}
 
 }

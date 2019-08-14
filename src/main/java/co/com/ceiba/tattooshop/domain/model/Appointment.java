@@ -1,26 +1,37 @@
 package co.com.ceiba.tattooshop.domain.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Appointment {
 
-	private Date startDate;
-	private Date endDate;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 	private Artist tattooArtist;
 
-	public Date getStartDate() {
+	public Appointment() {
+		super();
+	}
+
+	public Appointment(LocalDateTime startDate, LocalDateTime endDate, Artist tattooArtist) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.tattooArtist = tattooArtist;
+	}
+
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 

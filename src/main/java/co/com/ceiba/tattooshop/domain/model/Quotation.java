@@ -1,40 +1,50 @@
 package co.com.ceiba.tattooshop.domain.model;
 
+import java.time.LocalDateTime;
+
 public class Quotation {
 
-	private static final double TATTOO_HOUR_VALUE = 150000;
-	private static final double ADITIONAL_VALUE_POS_8 = 0.1;
-	private static final double ADITIONAL_VALUE_PRE_8 = 0.05;
+	public static final long TATTOO_HOUR_VALUE = 150000;
+	public static final double ADDITIONAL_VALUE_POS_8 = 0.1;
+	public static final double ADDITIONAL_VALUE_PRE_8 = 0.05;
 
-	private double totalQuotationValue;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private long totalQuotationValue;
 
 	public Quotation() {
 		super();
 	}
 
-	public Quotation(double totalQuotationValue) {
+	public Quotation(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue) {
 		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.totalQuotationValue = totalQuotationValue;
 	}
 
-	public double getTotalQuotationValue() {
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	public long getTotalQuotationValue() {
 		return totalQuotationValue;
 	}
 
-	public void setTotalQuotationValue(double totalQuotationValue) {
+	public void setTotalQuotationValue(long totalQuotationValue) {
 		this.totalQuotationValue = totalQuotationValue;
 	}
-
-//	public Quotation getQuotation(Date startHour, Date endHour) {		
-//		int diff = (int) ((endHour.getTime() - startHour.getTime()) / 1000);
-//		int hours = (diff / 3600);
-//		diff = diff - (hours * 3600);
-//		double basePrice = diff * TATTOO_HOUR_VALUE;
-//		
-//		
-//		
-//		Quotation quotation = new Quotation(hours);
-//		return quotation;
-//	}
 
 }
