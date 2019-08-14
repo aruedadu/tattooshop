@@ -76,6 +76,8 @@ public class QuotationServiceTest {
 		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 11, 10, 0);
 		int duration = 3;
 		
+		System.err.println("code smell test sonar");
+		
 		//act -assert
 		
 		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
