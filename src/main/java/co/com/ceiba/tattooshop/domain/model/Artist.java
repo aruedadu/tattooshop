@@ -2,6 +2,8 @@ package co.com.ceiba.tattooshop.domain.model;
 
 public class Artist {
 
+	private long id;
+
 	private String artistIdNumber;
 
 	private String artistFullName;
@@ -10,10 +12,19 @@ public class Artist {
 		super();
 	}
 
-	public Artist(String artistIdNumber, String artistFullName) {
+	public Artist(long id, String artistIdNumber, String artistFullName) {
 		super();
+		this.id = id;
 		this.artistIdNumber = artistIdNumber;
 		this.artistFullName = artistFullName;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getArtistIdNumber() {

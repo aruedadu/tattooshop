@@ -78,6 +78,7 @@ pipeline{
 		success {
 			echo "This will run only if successful"
 			//send notifications about a Pipeline to an email
+			junit 'build/test-results/test/*.xml'
 			mail (to: 'alejandro.rueda@ceiba.com.co',
 			     subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
 			     body: "Everything is ok with ${env.BUILD_URL}")
