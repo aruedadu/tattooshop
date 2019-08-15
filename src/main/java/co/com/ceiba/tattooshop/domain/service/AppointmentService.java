@@ -15,7 +15,7 @@ public class AppointmentService {
 	AppointmentRepository repoAppointment;
 	
 	@Autowired
-	private ModelMapper mapper;
+	ModelMapper mapper;
 	
 	public void createAppointmet(Appointment appointment) {
 		
