@@ -94,8 +94,6 @@ public class CitaServiceIntegrationTest {
 		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
 				.withTattooArtist(artist).withThirdIdNumber("101612355").build();
 
-		System.err.println("cita: " + appointment.toString());
-
 		AppointmentRepositoryImpl repository = new AppointmentRepositoryImpl(repositorio, mapper);
 
 		AppointmentService service = new AppointmentService(repository);

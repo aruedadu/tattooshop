@@ -39,9 +39,8 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
 	@Override
 	public Appointment consultarCita(String cedulaTercero, LocalDateTime fechaCita) {
-//		AppointmentEntity entidadCita = repositorio.consultarPorCedulaTerceroYFecha(cedulaTercero, fechaCita);
-//		return mapper.map(entidadCita, Appointment.class);
-		return null;
+		AppointmentEntity entidadCita = repositorio.consultarPorCedulaTerceroYFecha(cedulaTercero, fechaCita);
+		return mapper.map(entidadCita, Appointment.class);
 	}
 
 	@Override

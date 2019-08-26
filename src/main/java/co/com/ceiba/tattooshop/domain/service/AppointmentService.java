@@ -20,8 +20,6 @@ public class AppointmentService {
 	}
 
 	public void crearCita(Appointment appointment) {
-		System.err.println("holi");
-		System.err.println("repo null "+(null == repoAppointment));
 		repoAppointment.guardarCita(appointment);
 	}
 
