@@ -1,4 +1,4 @@
-package co.com.ceiba.tattooshop.controller;
+package co.com.ceiba.tattooshop.infraestructure.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

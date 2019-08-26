@@ -11,10 +11,10 @@ import org.modelmapper.ModelMapper;
 
 import co.com.ceiba.tattooshop.domain.model.Appointment;
 import co.com.ceiba.tattooshop.domain.model.Artist;
+import co.com.ceiba.tattooshop.domain.repository.AppointmentRepository;
 import co.com.ceiba.tattooshop.domain.service.AppointmentService;
 import co.com.ceiba.tattooshop.domain.testdatabuilder.AppointmentTestDataBuilder;
 import co.com.ceiba.tattooshop.domain.testdatabuilder.ArtistTestDataBuilder;
-import co.com.ceiba.tattooshop.infraestructure.repo.AppointmentRepository;
 
 public class AppointmentServiceTest {
 	

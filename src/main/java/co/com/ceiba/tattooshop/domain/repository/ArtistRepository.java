@@ -1,4 +1,4 @@
-package co.com.ceiba.tattooshop.infraestructure.repo;
+package co.com.ceiba.tattooshop.domain.repository;
 
 import java.util.List;
 
@@ -7,9 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import co.com.ceiba.tattooshop.infraestructure.entity.ArtistEntity;
 
-public interface ArtistRepository extends JpaRepository<ArtistEntity, Long> {
-
-	@Query("SELECT a FROM ArtistEntity a")
-	public List<ArtistEntity> getArtist();
+public interface ArtistRepository {
 
 }

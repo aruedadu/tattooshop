@@ -8,7 +8,7 @@ public class Appointment {
 	private LocalDateTime endDate;
 	private Artist tattooArtist;
 
-	public Appointment() {
+	public Appointment() {//TODO: QUITAR CONSTRUCTOR VACIO.
 		super();
 	}
 
