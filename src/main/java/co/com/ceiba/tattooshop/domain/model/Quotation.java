@@ -11,6 +11,7 @@ public class Quotation {
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	private long totalQuotationValue;
+	private int duracion;
 
 	public Quotation(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue) {
 		super();
@@ -41,6 +42,14 @@ public class Quotation {
 
 	public void setTotalQuotationValue(long totalQuotationValue) {
 		this.totalQuotationValue = totalQuotationValue;
+	}
+
+	public int getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
 	}
 
 }

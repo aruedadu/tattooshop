@@ -7,6 +7,6 @@ import co.com.ceiba.tattooshop.domain.model.Artist;
 
 public interface ArtistRepository {
 
-	public List<Artist> consultarArtistasDisponibles(LocalDateTime fechaCita, int duracion);
+	public List<Artist> consultarArtistasDisponibles(LocalDateTime fechaCita, LocalDateTime fechaFinCita);
 
 }

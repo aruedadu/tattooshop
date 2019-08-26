@@ -14,6 +14,9 @@ public class Artist {
 		this.artistIdNumber = artistIdNumber;
 		this.artistFullName = artistFullName;
 	}
+	
+	public Artist() {
+	}
 
 	public long getId() {
 		return id;
