@@ -44,7 +44,7 @@ public class AppointmentServiceTest {
 		AppointmentRepository repo = mock(AppointmentRepository.class);
 		
 		//act
-		service.createAppointmet(appointment);
+		service.crearCita(appointment);
 		
 		//assert
 		

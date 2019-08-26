@@ -12,10 +12,6 @@ public class Quotation {
 	private LocalDateTime endDate;
 	private long totalQuotationValue;
 
-	public Quotation() {
-		super();
-	}
-
 	public Quotation(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue) {
 		super();
 		this.startDate = startDate;

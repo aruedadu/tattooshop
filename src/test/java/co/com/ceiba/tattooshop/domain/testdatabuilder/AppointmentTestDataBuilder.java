@@ -10,6 +10,7 @@ public class AppointmentTestDataBuilder {
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	private Artist tattooArtist;
+	private String thirdIdNumber;
 
 	public AppointmentTestDataBuilder withStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
@@ -25,9 +26,14 @@ public class AppointmentTestDataBuilder {
 		this.tattooArtist = tattooArtist;
 		return this;
 	}
-	
+
+	public AppointmentTestDataBuilder withThirdIdNumber(String thirdIdNumber) {
+		this.thirdIdNumber = thirdIdNumber;
+		return this;
+	}
+
 	public Appointment build() {
-		return new Appointment(this.startDate, this.endDate, this.tattooArtist);
+		return new Appointment(this.startDate, this.endDate, this.tattooArtist, this.thirdIdNumber);
 	}
 
 }

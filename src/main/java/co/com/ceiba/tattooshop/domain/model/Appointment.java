@@ -7,16 +7,14 @@ public class Appointment {
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	private Artist tattooArtist;
+	private String thirdIdNumber;
 
-	public Appointment() {//TODO: QUITAR CONSTRUCTOR VACIO.
-		super();
-	}
-
-	public Appointment(LocalDateTime startDate, LocalDateTime endDate, Artist tattooArtist) {
+	public Appointment(LocalDateTime startDate, LocalDateTime endDate, Artist tattooArtist, String thirdIdNumber) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.tattooArtist = tattooArtist;
+		this.thirdIdNumber = thirdIdNumber;
 	}
 
 	public LocalDateTime getStartDate() {
@@ -41,6 +39,14 @@ public class Appointment {
 
 	public void setTattooArtist(Artist tattooArtist) {
 		this.tattooArtist = tattooArtist;
+	}
+
+	public String getThirdIdNumber() {
+		return thirdIdNumber;
+	}
+
+	public void setThirdIdNumber(String thirdIdNumber) {
+		this.thirdIdNumber = thirdIdNumber;
 	}
 
 }

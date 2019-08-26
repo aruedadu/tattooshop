@@ -8,10 +8,6 @@ public class Artist {
 
 	private String artistFullName;
 
-	public Artist() {
-		super();
-	}
-
 	public Artist(long id, String artistIdNumber, String artistFullName) {
 		super();
 		this.id = id;
