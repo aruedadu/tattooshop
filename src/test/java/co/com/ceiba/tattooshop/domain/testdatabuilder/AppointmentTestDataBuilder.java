@@ -7,6 +7,7 @@ import co.com.ceiba.tattooshop.domain.model.Artist;
 
 public class AppointmentTestDataBuilder {
 
+	private long id;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	private Artist tattooArtist;
@@ -32,8 +33,17 @@ public class AppointmentTestDataBuilder {
 		return this;
 	}
 
+	public AppointmentTestDataBuilder withId(long id) {
+		this.id = id;
+		return this;
+	}
+
 	public Appointment build() {
 		return new Appointment(this.startDate, this.endDate, this.tattooArtist, this.thirdIdNumber);
+	}
+	
+	public Appointment buildWithId() {
+		return new Appointment(this.id, this.startDate, this.endDate, this.tattooArtist, this.thirdIdNumber);
 	}
 
 }

@@ -9,7 +9,7 @@ import co.com.ceiba.tattooshop.domain.model.Artist;
 import co.com.ceiba.tattooshop.domain.repository.ArtistRepository;
 
 @Repository
-public class ArtistRepositoryImpl implements ArtistRepository {
+public class ArtistRepositoryImpl implements ArtistRepository{
 
 	@Override
 	public List<Artist> consultarArtistasDisponibles(LocalDateTime fechaCita, int duracion) {
