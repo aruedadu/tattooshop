@@ -37,10 +37,14 @@ public class CitaServiceIntegrationTest {
 	private ModelMapper mapper;
 
 	@LocalServerPort
-    private int port;
+	private int port;
 
 	TestRestTemplate restTemplate = new TestRestTemplate();
 	HttpHeaders headers = new HttpHeaders();
+
+	private static final String CEDULA_ARTISTA = "1037604310";
+	private static final String NOMBRE_ARTISTA = "Alejandro Rueda";
+	private static final String CEDULA_CLIENTE = "101612355";
 
 	@Test
 	public void saveAppointmentTestService() {
@@ -48,25 +52,20 @@ public class CitaServiceIntegrationTest {
 		// arrange
 		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 9, 0);
 		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 12, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber("1037604310")
-				.withArtistFullName("Alejandro Rueda").build();
+		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
+				.withArtistFullName(NOMBRE_ARTISTA).build();
 		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber("101612355").build();
+				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).build();
 
-		HttpEntity<Appointment> entity = new HttpEntity<Appointment>(appointment, headers);
+		HttpEntity<Appointment> entity = new HttpEntity<>(appointment, headers);
 		ResponseEntity<Appointment> response = restTemplate.exchange(crearURL("/tattooshop/appointment/crear-cita"),
 				HttpMethod.POST, entity, Appointment.class);
-		//String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
 		int status = response.getStatusCodeValue();
-		//System.err.println("actual " + actual);
-		//assertTrue(actual.contains("/students"));
-		System.err.println("actual " + status);
 		assertTrue(status == 200);
 
 	}
 
 	private String crearURL(String uri) {
-		System.err.println("http://localhost:" + port + uri);
 		return "http://localhost:" + port + uri;
 	}
 
@@ -76,10 +75,10 @@ public class CitaServiceIntegrationTest {
 		// arrange
 		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 13, 0);
 		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 15, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber("1037604310")
-				.withArtistFullName("Alejandro Rueda").build();
+		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
+				.withArtistFullName(NOMBRE_ARTISTA).build();
 		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber("101612355").withId(1).buildWithId();
+				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).withId(1).buildWithId();
 
 		AppointmentRepositoryImpl repository = new AppointmentRepositoryImpl(repositorio, mapper);
 
@@ -90,17 +89,16 @@ public class CitaServiceIntegrationTest {
 
 	}
 
-
 	@Test
 	public void saveAppointmentTest() {
 
 		// arrange
 		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 13, 0);
 		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 15, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber("1037604310")
-				.withArtistFullName("Alejandro Rueda").build();
+		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
+				.withArtistFullName(NOMBRE_ARTISTA).build();
 		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber("101612355").build();
+				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).build();
 
 		AppointmentRepositoryImpl repository = new AppointmentRepositoryImpl(repositorio, mapper);
 

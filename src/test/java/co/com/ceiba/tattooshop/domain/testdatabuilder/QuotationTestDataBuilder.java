@@ -9,13 +9,7 @@ public class QuotationTestDataBuilder {
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
 	private long totalQuotationValue;
-
-	public QuotationTestDataBuilder(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue) {
-		super();
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.totalQuotationValue = totalQuotationValue;
-	}
+	private int duracion;
 
 	public QuotationTestDataBuilder withStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
@@ -31,9 +25,14 @@ public class QuotationTestDataBuilder {
 		this.totalQuotationValue = totalQuotationValue;
 		return this;
 	}
-	
+
+	public QuotationTestDataBuilder withDuration(int duracion) {
+		this.duracion = duracion;
+		return this;
+	}
+
 	public Quotation build() {
-		return new Quotation(this.startDate, this.endDate, this.totalQuotationValue);
+		return new Quotation(this.startDate, this.endDate, this.totalQuotationValue, this.duracion);
 	}
 
 }

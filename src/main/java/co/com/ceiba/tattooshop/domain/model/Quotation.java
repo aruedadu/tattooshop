@@ -13,11 +13,21 @@ public class Quotation {
 	private long totalQuotationValue;
 	private int duracion;
 
+	public Quotation() {}
+
 	public Quotation(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.totalQuotationValue = totalQuotationValue;
+	}
+
+	public Quotation(LocalDateTime startDate, LocalDateTime endDate, long totalQuotationValue, int duracion) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalQuotationValue = totalQuotationValue;
+		this.duracion = duracion;
 	}
 
 	public LocalDateTime getStartDate() {

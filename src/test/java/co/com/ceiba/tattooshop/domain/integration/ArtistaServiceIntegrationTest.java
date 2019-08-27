@@ -52,25 +52,5 @@ public class ArtistaServiceIntegrationTest {
 		assertTrue(artistasEsperados.size() == artistasEncontrados.size());
 
 	}
-	
-	@Test
-	public void noArtistasDisponibleTest() {
-
-		// arrange
-		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 16, 13, 0);
-		int duracion = 3;		
-		ArtistRepositoryImpl repositorio = new ArtistRepositoryImpl(repositorioJpa, mapper);
-
-		ArtistaService servicio = new ArtistaService(repositorio);
-
-		List<Artist> artistasEsperados = new ArrayList<>();
-
-		// act
-		List<Artist> artistasEncontrados = servicio.consultarArtistasDisponibles(startDate, duracion);
-
-		// assert
-		assertTrue(artistasEsperados.size() == artistasEncontrados.size());
-
-	}
 
 }
