@@ -18,11 +18,10 @@ public class QuotationController {
 	@Autowired
 	QuotationService servicio;
 
-	@PostMapping("/generar")
+	@PostMapping(value = "/generar")
 	public @ResponseBody Quotation consultarCotizacion(@RequestBody Quotation payload) {
-		
-		return servicio.getQuotation(payload.getStartDate(),
-				payload.getDuracion());
+
+		return servicio.getQuotation(payload.getStartDate(), payload.getDuracion());
 
 	}
 
