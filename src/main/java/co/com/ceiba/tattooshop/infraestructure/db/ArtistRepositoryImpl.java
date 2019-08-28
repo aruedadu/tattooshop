@@ -33,7 +33,11 @@ public class ArtistRepositoryImpl implements ArtistRepository {
 		List<ArtistEntity> listaArtistasEntidad = repositorio.consultarArtistasDisponibles(fechaCita, fechaFinCita);
 		List<Artist> artistas = new ArrayList<>();
 		for (ArtistEntity entidad : listaArtistasEntidad) {
-			artistas.add(mapper.map(entidad, Artist.class));
+			artistas.add(new Artist(
+					entidad.getId(),
+					entidad.getArtistFullName(),
+					entidad.getArtistIdNumber()
+			));
 		}
 		return artistas;
 	}

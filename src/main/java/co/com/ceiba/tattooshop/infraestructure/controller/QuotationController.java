@@ -1,9 +1,5 @@
 package co.com.ceiba.tattooshop.infraestructure.controller;
 
-import java.time.ZoneId;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalField;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.ceiba.tattooshop.domain.model.Quotation;
 import co.com.ceiba.tattooshop.domain.service.QuotationService;
 import co.com.ceiba.tattooshop.infraestructure.controller.peticiones.CotizacionRequest;
+import co.com.ceiba.tattooshop.infraestructure.controller.utlidades.UtilitariosFecha;
 
 @CrossOrigin
 @RestController
@@ -27,19 +24,7 @@ public class QuotationController {
 
 	@PostMapping(value = "/generar")
 	public @ResponseBody Quotation consultarCotizacion(@RequestBody CotizacionRequest payload) {
-		return servicio.getQuotation(
-				payload.getFechaInicio().toInstant().atZone(ZoneId.from(new TemporalAccessor() {
-					
-					@Override
-					public boolean isSupported(TemporalField field) {
-						return true;
-					}
-					
-					@Override
-					public long getLong(TemporalField field) {
-						return 0;
-					}
-				})).toLocalDateTime(),
+		return servicio.getQuotation(UtilitariosFecha.utilConvertToLocal(payload.getFechaInicio()),
 				payload.getDuracion());
 
 	}
