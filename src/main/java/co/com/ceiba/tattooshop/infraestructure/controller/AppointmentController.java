@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +16,7 @@ import co.com.ceiba.tattooshop.domain.model.Appointment;
 import co.com.ceiba.tattooshop.domain.model.Artist;
 import co.com.ceiba.tattooshop.domain.service.AppointmentService;
 import co.com.ceiba.tattooshop.infraestructure.controller.peticiones.CrearCitaRequest;
+import co.com.ceiba.tattooshop.infraestructure.controller.respuestas.ConsultarCitasRequestResponse;
 import co.com.ceiba.tattooshop.infraestructure.controller.utlidades.UtilitariosFecha;
 
 @CrossOrigin
@@ -42,16 +42,13 @@ public class AppointmentController {
 		servicio.cancelarCita(appointment);
 	}
 
-	@PostMapping(value = "/consultar-cita")
-	public @ResponseBody Appointment consultarCita(@RequestParam(value = "fechaCita") String cedulaTercero,
-			@RequestParam(value = "fechaCita") LocalDateTime fechaCita) {
-		return servicio.consultarCita(cedulaTercero, fechaCita);
-	}
-
 	@PostMapping(value = "/consultar-todas-citas")
-	public @ResponseBody List<LocalDateTime> consultarTodasLasCitas(
-			@RequestParam(value = "fechaCita") String cedulaTercero) {
-		return servicio.consultarTodasLasCitas(cedulaTercero);
+	public @ResponseBody ConsultarCitasRequestResponse consultarTodasLasCitas(@RequestBody ConsultarCitasRequestResponse cedulaCliente) {
+		List<Appointment> citas =servicio.consultarTodasLasCitas(cedulaCliente.getCedulaCliente());
+		ConsultarCitasRequestResponse respuesta = new ConsultarCitasRequestResponse();
+		respuesta.setCedulaCliente(cedulaCliente.getCedulaCliente());
+		respuesta.setCitas(citas);
+		return respuesta;
 	}
 
 }

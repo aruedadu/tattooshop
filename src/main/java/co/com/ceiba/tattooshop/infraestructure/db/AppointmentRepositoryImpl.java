@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import co.com.ceiba.tattooshop.domain.model.Appointment;
+import co.com.ceiba.tattooshop.domain.model.Artist;
 import co.com.ceiba.tattooshop.domain.repository.AppointmentRepository;
 import co.com.ceiba.tattooshop.infraestructure.db.jpa.CitaRepositoryJPA;
 import co.com.ceiba.tattooshop.infraestructure.entity.AppointmentEntity;
@@ -38,19 +39,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 	}
 
 	@Override
-	public Appointment consultarCita(String cedulaTercero, LocalDateTime fechaCita) {
-		AppointmentEntity entidadCita = repositorio.consultarPorCedulaTerceroYFecha(cedulaTercero, fechaCita);
-		return mapper.map(entidadCita, Appointment.class);
-	}
-
-	@Override
-	public List<LocalDateTime> consultarTodasLasCitas(String cedulaTercero) {
-		ArrayList<AppointmentEntity> listaCitas = (ArrayList<AppointmentEntity>) repositorio.findAll();
-		List<LocalDateTime> fechasCitas = new ArrayList<>();
+	public List<Appointment> consultarTodasLasCitas(String cedulaTercero) {
+		ArrayList<AppointmentEntity> listaCitas = (ArrayList<AppointmentEntity>) repositorio.consultarCitasTercero(cedulaTercero);
+		List<Appointment> citas = new ArrayList<>();
 		for (AppointmentEntity cita : listaCitas) {
-			fechasCitas.add(cita.getStartDate());
+			citas.add(mapper.map(cita, Appointment.class));
 		}
-		return fechasCitas;
+		return citas;
 	}
 
 }

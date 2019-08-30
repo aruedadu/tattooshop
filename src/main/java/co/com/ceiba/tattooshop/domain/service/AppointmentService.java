@@ -27,11 +27,7 @@ public class AppointmentService {
 		repoAppointment.cancelarCita(appointment);
 	}
 
-	public Appointment consultarCita(String cedulaTercero, LocalDateTime fechaCita) {
-		return repoAppointment.consultarCita(cedulaTercero, fechaCita);
-	}
-
-	public List<LocalDateTime> consultarTodasLasCitas(String cedulaTercero) {
+	public List<Appointment> consultarTodasLasCitas(String cedulaTercero) {
 		return repoAppointment.consultarTodasLasCitas(cedulaTercero);
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import co.com.ceiba.tattooshop.domain.exception.NoServiceException;
 import co.com.ceiba.tattooshop.domain.model.Quotation;
 
+//TODO: VERIFICAR HORA INICIO Y HORA FINAL, NO DEBE PODER ASIGNAR CITAS PREVIAS A LAS 10AM NI POSTERIORES A MEDIA NOCHE, LA HORA DE INICIO NO PUEDE SER PREVIA A LA HORA ACTUAL NI LA FEHCA ACTUAL 
 @Service
 public class QuotationService {
 

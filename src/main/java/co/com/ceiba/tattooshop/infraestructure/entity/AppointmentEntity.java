@@ -31,7 +31,7 @@ public class AppointmentEntity {
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "ID")
-	private ArtistEntity artist;
+	private ArtistEntity tattooArtist;
 
 	@Column(name = "THIRD_ID_NUMBER", nullable = false)
 	private String thirdIdNumber;
@@ -40,13 +40,13 @@ public class AppointmentEntity {
 	}
 
 	public AppointmentEntity(long id, LocalDateTime startDate, LocalDateTime endDate, double totalValue,
-			ArtistEntity artist, String thirdIdNumber) {
+			ArtistEntity tattooArtist, String thirdIdNumber) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.totalValue = totalValue;
-		this.artist = artist;
+		this.tattooArtist = tattooArtist;
 		this.thirdIdNumber = thirdIdNumber;
 	}
 
@@ -82,12 +82,12 @@ public class AppointmentEntity {
 		this.totalValue = totalValue;
 	}
 
-	public ArtistEntity getArtist() {
-		return artist;
+	public ArtistEntity getTattooArtist() {
+		return tattooArtist;
 	}
 
-	public void setArtist(ArtistEntity artist) {
-		this.artist = artist;
+	public void setTattooArtist(ArtistEntity tattooArtist) {
+		this.tattooArtist = tattooArtist;
 	}
 
 	public String getThirdIdNumber() {
