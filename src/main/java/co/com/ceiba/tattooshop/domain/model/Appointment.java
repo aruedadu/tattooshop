@@ -1,9 +1,14 @@
 package co.com.ceiba.tattooshop.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Appointment {
+public class Appointment implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2751136619358942720L;
 	private long id;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;

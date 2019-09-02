@@ -14,6 +14,16 @@ public class CrearCitaRequest implements Serializable {
 	private int duracion;
 	private String artistaId;
 	private String terceroNumeroId;
+	
+	public CrearCitaRequest() {
+	}
+
+	public CrearCitaRequest(Date fechaInicio, int duracion, String artistaId, String terceroNumeroId) {
+		this.fechaInicio = fechaInicio;
+		this.duracion = duracion;
+		this.artistaId = artistaId;
+		this.terceroNumeroId = terceroNumeroId;
+	}
 
 	public Date getFechaInicio() {
 		return fechaInicio;

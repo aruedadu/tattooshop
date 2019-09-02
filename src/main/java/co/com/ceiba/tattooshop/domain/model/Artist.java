@@ -1,7 +1,13 @@
 package co.com.ceiba.tattooshop.domain.model;
 
-public class Artist {
+import java.io.Serializable;
 
+public class Artist implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4745448808840120028L;
 	private long id;
 	private String artistFullName;
 	private String artistIdNumber;

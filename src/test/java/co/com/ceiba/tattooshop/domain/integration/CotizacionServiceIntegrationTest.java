@@ -28,11 +28,10 @@ public class CotizacionServiceIntegrationTest {
 	private int port;
 	
 	private static final String API_GENERAR_COTIZACION = "/tattooshop/cotizacion/generar";
+	private static final String FORMATO_FECHA = "dd/MM/yyyy HH:mm";
 
 	TestRestTemplate restTemplate = new TestRestTemplate();
 	HttpHeaders headers = new HttpHeaders();
-	
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;
@@ -42,6 +41,7 @@ public class CotizacionServiceIntegrationTest {
 	public void hacerCotizacionSinValorAdicionalTest() throws ParseException {
 		//'05/09/2019 10:00', 'dd/MM/yyyy HH:mm'
 		// arrange
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA);
 		CotizacionRequest request = new CotizacionRequestDataBuilder().withFechaInicio(sdf.parse("05/09/2019 10:00")).withDuracion(3)
 				.build();
 
@@ -58,6 +58,7 @@ public class CotizacionServiceIntegrationTest {
 	@Test
 	public void hacerCotizacionValorAdicionalAntes8Test() throws ParseException {
 		//arrange
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA);
 		CotizacionRequest request = new CotizacionRequestDataBuilder().withFechaInicio(sdf.parse("05/09/2019 19:00")).withDuracion(3)
 				.build();
 
@@ -74,6 +75,7 @@ public class CotizacionServiceIntegrationTest {
 	@Test
 	public void hacerCotizacionValorAdicionalDespues8Test() throws ParseException {
 		//arrange
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA);
 		CotizacionRequest request = new CotizacionRequestDataBuilder().withFechaInicio(sdf.parse("05/09/2019 20:00")).withDuracion(3)
 				.build();
 

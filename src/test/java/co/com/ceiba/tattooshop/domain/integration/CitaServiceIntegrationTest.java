@@ -2,14 +2,12 @@ package co.com.ceiba.tattooshop.domain.integration;
 
 import static org.junit.Assert.assertTrue;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -20,22 +18,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.tattooshop.domain.model.Appointment;
-import co.com.ceiba.tattooshop.domain.model.Artist;
-import co.com.ceiba.tattooshop.domain.service.AppointmentService;
 import co.com.ceiba.tattooshop.domain.testdatabuilder.AppointmentTestDataBuilder;
-import co.com.ceiba.tattooshop.domain.testdatabuilder.ArtistTestDataBuilder;
-import co.com.ceiba.tattooshop.infraestructure.db.AppointmentRepositoryImpl;
-import co.com.ceiba.tattooshop.infraestructure.db.jpa.CitaRepositoryJPA;
+import co.com.ceiba.tattooshop.domain.testdatabuilder.CitaRequestTestDataBuilder;
+import co.com.ceiba.tattooshop.domain.testdatabuilder.ConsultarCitasRequestResponseTestDataBuilder;
+import co.com.ceiba.tattooshop.infraestructure.controller.peticiones.CrearCitaRequest;
+import co.com.ceiba.tattooshop.infraestructure.controller.respuestas.ConsultarCitasRequestResponse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CitaServiceIntegrationTest {
-
-	@Autowired
-	private CitaRepositoryJPA repositorio;
-
-	@Autowired
-	private ModelMapper mapper;
 
 	@LocalServerPort
 	private int port;
@@ -43,72 +34,64 @@ public class CitaServiceIntegrationTest {
 	TestRestTemplate restTemplate = new TestRestTemplate();
 	HttpHeaders headers = new HttpHeaders();
 
-	private static final String CEDULA_ARTISTA = "1037604310";
-	private static final String NOMBRE_ARTISTA = "Alejandro Rueda";
 	private static final String CEDULA_CLIENTE = "1017159532";
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-	@Test
-	public void saveAppointmentTestService() {
-
-		// arrange
-		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 9, 0);
-		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 12, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
-				.withArtistFullName(NOMBRE_ARTISTA).build();
-		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).build();
-
-		HttpEntity<Appointment> entity = new HttpEntity<>(appointment, headers);
-		ResponseEntity<Appointment> response = restTemplate.exchange(crearURL("/tattooshop/appointment/crear-cita"),
-				HttpMethod.POST, entity, Appointment.class);
-		int status = response.getStatusCodeValue();
-		System.err.println("status "+status);
-		assertTrue(status == 200);
-
-	}
+	private static final String FORMATO_FECHA = "dd/MM/yyyy HH:mm";
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;
 	}
 
 	@Test
-	public void deleteAppointmentTest() {
-
+	public void consultarCitasTest() {
 		// arrange
-		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 13, 0);
-		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 15, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
-				.withArtistFullName(NOMBRE_ARTISTA).build();
-		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).withId(1).buildWithId();
+		ConsultarCitasRequestResponse request = new ConsultarCitasRequestResponseTestDataBuilder()
+				.withCedulaCliente(CEDULA_CLIENTE).build();
+		HttpEntity<ConsultarCitasRequestResponse> entity = new HttpEntity<>(request, headers);
 
-		AppointmentRepositoryImpl repository = new AppointmentRepositoryImpl(repositorio, mapper);
+		// act
+		ResponseEntity<ConsultarCitasRequestResponse> response = restTemplate.exchange(
+				crearURL("/tattooshop/appointment/consultar-todas-citas"), HttpMethod.POST, entity,
+				ConsultarCitasRequestResponse.class);
 
-		AppointmentService service = new AppointmentService(repository);
+		List<Appointment> citas = response.getBody().getCitas();
 
-		// act - assert
-		service.cancelarCita(appointment);
+		// assert
+		assertTrue(!citas.isEmpty());
 
 	}
 
 	@Test
-	public void saveAppointmentTest() {
-
+	public void saveAppointmentTestService() throws ParseException {
 		// arrange
-		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 15, 13, 0);
-		LocalDateTime endDate = LocalDateTime.of(2019, Month.AUGUST, 15, 15, 0);
-		Artist artist = new ArtistTestDataBuilder().withId(1).withArtistIdNumber(CEDULA_ARTISTA)
-				.withArtistFullName(NOMBRE_ARTISTA).build();
-		Appointment appointment = new AppointmentTestDataBuilder().withStartDate(startDate).withEndDate(endDate)
-				.withTattooArtist(artist).withThirdIdNumber(CEDULA_CLIENTE).build();
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATO_FECHA);
+		CrearCitaRequest request = new CitaRequestTestDataBuilder().withFechaInicio(sdf.parse("05/09/2019 10:00"))
+				.withDuracion(3).withArtistaId("1").withTerceroNumeroId(CEDULA_CLIENTE).build();
 
-		AppointmentRepositoryImpl repository = new AppointmentRepositoryImpl(repositorio, mapper);
+		HttpEntity<CrearCitaRequest> entity = new HttpEntity<>(request, headers);
 
-		AppointmentService service = new AppointmentService(repository);
+		// act
+		ResponseEntity<Appointment> response = restTemplate.exchange(crearURL("/tattooshop/appointment/crear-cita"),
+				HttpMethod.POST, entity, Appointment.class);
 
-		// act - assert
-		service.crearCita(appointment);
+		int status = response.getStatusCodeValue();
+		// assert
+		assertTrue(status == 200);
+	}
+
+	@Test
+	public void deleteAppointmentTest() {
+		// arrange
+		Appointment appointment = new AppointmentTestDataBuilder().withId(1).buildWithId();
+
+		HttpEntity<Appointment> entity = new HttpEntity<>(appointment, headers);
+
+		// act
+		ResponseEntity<Appointment> response = restTemplate.exchange(crearURL("/tattooshop/appointment/cancelar-cita"),
+				HttpMethod.POST, entity, Appointment.class);
+
+		int status = response.getStatusCodeValue();
+		// assert
+		assertTrue(status == 200);
 
 	}
 }
