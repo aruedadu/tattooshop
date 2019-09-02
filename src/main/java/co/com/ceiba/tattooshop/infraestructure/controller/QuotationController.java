@@ -26,9 +26,6 @@ public class QuotationController {
 	public @ResponseBody Quotation consultarCotizacion(@RequestBody CotizacionRequest payload) {
 		return servicio.getQuotation(UtilitariosFecha.utilConvertToLocal(payload.getFechaInicio()),
 				payload.getDuracion());
-//		return servicio.getQuotation(
-//				payload.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
-//				payload.getDuracion());
 
 	}
 
