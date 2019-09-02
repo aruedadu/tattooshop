@@ -24,7 +24,7 @@ public class QuotationService {
 			throw new NoServiceException("El servicio inicia a las 10 am");
 		}
 		if (duration > (HORA_MAXIMA_ATENCION - startDate.getHour())) {
-			throw new NoServiceException("No es posible agendar una cita cuya duración supere la media noche.");
+			throw new NoServiceException("No es posible agendar una cita cuya duracion supere la media noche.");
 		}
 		LocalDateTime endDate = startDate.plusHours(duration);
 		long quotationValue = Quotation.TATTOO_HOUR_VALUE * duration;
