@@ -108,7 +108,7 @@ public class QuotationServiceTest {
 		
 		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
 			service.getQuotation(startDate, duration)
-		).withMessageMatching("No es posible agendar una cita cuya duración supere la media noche.");
+		).withMessageMatching("No es posible agendar una cita cuya duracion supere la media noche.");
 	}
 
 }
