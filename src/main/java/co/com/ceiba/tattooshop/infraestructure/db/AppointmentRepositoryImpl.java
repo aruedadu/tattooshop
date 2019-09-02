@@ -1,6 +1,5 @@
 package co.com.ceiba.tattooshop.infraestructure.db;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import co.com.ceiba.tattooshop.domain.model.Appointment;
-import co.com.ceiba.tattooshop.domain.model.Artist;
 import co.com.ceiba.tattooshop.domain.repository.AppointmentRepository;
 import co.com.ceiba.tattooshop.infraestructure.db.jpa.CitaRepositoryJPA;
 import co.com.ceiba.tattooshop.infraestructure.entity.AppointmentEntity;

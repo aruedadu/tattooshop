@@ -24,8 +24,12 @@ public class QuotationController {
 
 	@PostMapping(value = "/generar")
 	public @ResponseBody Quotation consultarCotizacion(@RequestBody CotizacionRequest payload) {
+		System.err.println("fecha en controller: " + payload.getFechaInicio());
 		return servicio.getQuotation(UtilitariosFecha.utilConvertToLocal(payload.getFechaInicio()),
 				payload.getDuracion());
+//		return servicio.getQuotation(
+//				payload.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+//				payload.getDuracion());
 
 	}
 

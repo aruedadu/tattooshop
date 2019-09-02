@@ -30,7 +30,7 @@ public class AppointmentEntity {
 	private double totalValue;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "ID")
+	@JoinColumn(name = "ID_ARTIST", referencedColumnName = "ID")
 	private ArtistEntity tattooArtist;
 
 	@Column(name = "THIRD_ID_NUMBER", nullable = false)

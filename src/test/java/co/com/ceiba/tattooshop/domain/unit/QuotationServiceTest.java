@@ -24,7 +24,7 @@ public class QuotationServiceTest {
 	public void makeQuotationNoAdditionalValueTest() {
 		//arrange
 		QuotationService service = new QuotationService();		
-		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 12, 9, 0);
+		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 12, 10, 0);
 		int duration = 3;
 		
 		//act
@@ -81,6 +81,34 @@ public class QuotationServiceTest {
 		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
 			service.getQuotation(startDate, duration)
 		).withMessageMatching("Los Domingos no hay servicio!");
+	}
+	
+	@Test
+	public void hacerCotizacionPreHoraMinimaTest() {
+		//arrange
+		QuotationService service = new QuotationService();		
+		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 12, 8, 0);
+		int duration = 3;
+		
+		//act -assert
+		
+		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
+			service.getQuotation(startDate, duration)
+		).withMessageMatching("El servicio inicia a las 10 am");
+	}
+	
+	@Test
+	public void hacerCotizacionSuperaDuracionMaximaTest() {
+		//arrange
+		QuotationService service = new QuotationService();		
+		LocalDateTime startDate = LocalDateTime.of(2019, Month.AUGUST, 12, 22, 0);
+		int duration = 3;
+		
+		//act -assert
+		
+		assertThatExceptionOfType(NoServiceException.class).isThrownBy(() -> 
+			service.getQuotation(startDate, duration)
+		).withMessageMatching("No es posible agendar una cita cuya duración supere la media noche.");
 	}
 
 }

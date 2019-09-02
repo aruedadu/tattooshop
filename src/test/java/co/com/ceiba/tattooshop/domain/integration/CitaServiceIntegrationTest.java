@@ -2,6 +2,7 @@ package co.com.ceiba.tattooshop.domain.integration;
 
 import static org.junit.Assert.assertTrue;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -44,7 +45,8 @@ public class CitaServiceIntegrationTest {
 
 	private static final String CEDULA_ARTISTA = "1037604310";
 	private static final String NOMBRE_ARTISTA = "Alejandro Rueda";
-	private static final String CEDULA_CLIENTE = "101612355";
+	private static final String CEDULA_CLIENTE = "1017159532";
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	@Test
 	public void saveAppointmentTestService() {
@@ -61,6 +63,7 @@ public class CitaServiceIntegrationTest {
 		ResponseEntity<Appointment> response = restTemplate.exchange(crearURL("/tattooshop/appointment/crear-cita"),
 				HttpMethod.POST, entity, Appointment.class);
 		int status = response.getStatusCodeValue();
+		System.err.println("status "+status);
 		assertTrue(status == 200);
 
 	}
